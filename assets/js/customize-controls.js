@@ -7,7 +7,7 @@
 
 	$.each({
 		'show_on_front': {
-			controls: [ 'page_for_posts', 'archive_on_front' ],
+			controls: [ 'archive_on_front', 'page_for_posts' ],
 			callback: function( to ) { return 'archive' === to; }
 		}
 	}, function( settingId, o ) {
@@ -23,6 +23,17 @@
 				});
 			});
 		});
+	});
+
+	// Change previewed URL to the homepage when changing the archive_on_front.
+	api( 'show_on_front', 'archive_on_front', function( showOnFront, archiveOnFront ) {
+		var updatePreviewUrl = function() {
+			if ( showOnFront() === 'archive' && showOnFront() !== '' ) {
+				api.previewer.previewUrl.set( api.settings.url.home );
+			}
+		};
+		showOnFront.bind( updatePreviewUrl );
+		archiveOnFront.bind( updatePreviewUrl );
 	});
 
 })( jQuery, _, wp );
