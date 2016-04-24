@@ -102,9 +102,8 @@ class FrontPageArchives_Plugin extends FrontPageArchives_AbstractPlugin {
 			'_builtin'           => false,
 		) );
 
-		if ( in_array( $archive_on_front, $post_types ) && $query->is_home() && $query->is_main_query() ) :
+		if ( in_array( $archive_on_front, $post_types ) && $query->is_home() && $query->is_main_query() ) {
 			$query->set( 'post_type', $archive_on_front );
-			// $query->set( 'page_id', '' );
 
 			// Set properties that describe the page to reflect that we aren't
 			// really displaying a static page.
@@ -112,6 +111,6 @@ class FrontPageArchives_Plugin extends FrontPageArchives_AbstractPlugin {
 			$query->is_singular          = 0;
 			$query->is_post_type_archive = 1;
 			$query->is_archive           = 1;
-		endif;
+		}
 	}
 }
