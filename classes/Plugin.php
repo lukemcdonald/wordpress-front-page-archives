@@ -42,7 +42,9 @@ class FrontPageArchives_Plugin extends FrontPageArchives_AbstractPlugin {
 			&& 'archive' === $show_on_front
 			&& ! empty( $archive_on_front )
 		) {
+			$classes[] = 'home';
 			$classes[] = 'front-page-archive';
+			$classes = array_diff( $classes, array( 'blog' ) );
 		}
 
 		return $classes;
